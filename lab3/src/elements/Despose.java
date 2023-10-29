@@ -2,7 +2,7 @@ package elements;
 
 import other.Client;
 
-public class Despose extends Element{
+public class Despose extends Element {
     private Client nextClient;
     private double meanTime = 0.0;
 

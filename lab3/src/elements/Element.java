@@ -57,26 +57,23 @@ public class Element {
 
     public double getDelay() {
         double delay = getDelayMean();
-        if ("exp".equalsIgnoreCase(getDistribution())) {
-            delay = FunRand.Exp(getDelayMean());
-        } else {
-            if ("norm".equalsIgnoreCase(getDistribution())) {
-                delay = FunRand.Norm(getDelayMean(),
-                        getDelayDev());
-            } else {
-                if ("unif".equalsIgnoreCase(getDistribution())) {
-                    delay = FunRand.Unif(getDelayMean(),
-                            getDelayDev());
-                } else {
-                    if("".equalsIgnoreCase(getDistribution())) {
-                        delay = getDelayMean();
-                    } else {
-                        if ("erlang".equalsIgnoreCase(getDistribution()))
-                            delay = FunRand.Erlang(getDelayMean(), getK());
-                    }
-                }
-            }
+        String distribution = getDistribution().toLowerCase();
+
+        switch (distribution) {
+            case "exp":
+                delay = FunRand.Exp(getDelayMean());
+                break;
+            case "norm":
+                delay = FunRand.Norm(getDelayMean(), getDelayDev());
+                break;
+            case "unif":
+                delay = FunRand.Unif(getDelayMean(), getDelayDev());
+                break;
+            case "erlang":
+                delay = FunRand.Erlang(getDelayMean(), getK());
+                break;
         }
+
         return delay;
     }
 

@@ -1,12 +1,10 @@
-import bank.Cashier;
-
 import elements.Create;
 import elements.Despose;
 import elements.Element;
 import elements.Process;
 
-import hospital.Reception;
-import hospital.Lab;
+import hospitalWhynot.Reception;
+import hospitalWhynot.Lab;
 import other.Client;
 import other.Model;
 
@@ -57,59 +55,59 @@ public class SimModel {
         Model model = new Model(list);
         model.simulate(500.0);
     }
-    public static void bankTask() {
-        Create create = new Create(0.5, "priors");
-        Cashier cashier1 = new Cashier(1, "probs");
-        Cashier cashier2 = new Cashier(1, "probs");
-        Despose despose = new Despose();
-
-        create.setDistribution("exp");
-        create.addNext(cashier1, 1);
-        create.addNext(cashier2, 2);
-
-        cashier1.setDelayDev(0.3);
-        cashier1.addLane(cashier2);
-        cashier1.setMaxQueue(3);
-        cashier1.setMaxWorkers(1);
-        cashier1.addNext(despose, 1.0);
-        cashier1.inAct(new Client(0.0, 1));
-        cashier1.inAct(new Client(0.0, 1));
-        cashier1.inAct(new Client(0.0, 1));
-
-        cashier2.setDelayDev(0.3);
-        cashier2.addLane(cashier1);
-        cashier2.setMaxQueue(3);
-        cashier2.setMaxWorkers(1);
-        cashier2.addNext(despose, 1.0);
-        cashier2.inAct(new Client(0.0, 1));
-        cashier2.inAct(new Client(0.0, 1));
-        cashier2.inAct(new Client(0.0, 1));
-
-        ArrayList<Element> list = new ArrayList<>(){{add(create); add(cashier1); add(cashier2); add(despose);}};
-        Model model = new Model(list);
-        double time = 1000.0;
-        model.simulate(time);
-
-        System.out.println("\n-------------RESULTS-------------");
-        for (Element e : list) {
-            e.printResult();
-            if (e instanceof Cashier) {
-                Cashier c = (Cashier) e;
-                System.out.println("Cashier #" + c.getId());
-                System.out.println("1) " + c.getStateSum() / time);
-                System.out.println("2) " + (c.getMeanQueue() + c.getStateSum()) / time);
-                System.out.println("3) " + time / c.getQuantity());
-                System.out.println("4) " + (c.getMeanQueue() / time + 2) * (time - c.getWaitTime()) / c.getQuantity());
-                System.out.println("5) " + c.getMeanQueue() / time);
-                System.out.println("6) " + c.getFailure() / (double) (c.getFailure() + c.getQuantity()));
-                System.out.println("7) " + c.getNumOfSwaps());
-            } else if (e instanceof Despose) {
-                Despose d = (Despose) e;
-                System.out.println("4 from Despose)   " + d.getMeanTime() / d.getQuantity());
-                System.out.println("Quantity = " + d.getQuantity());
-            }
-        }
-    }
+//    public static void bankTask() {
+//        Create create = new Create(0.5, "priors");
+//        Cashier cashier1 = new Cashier(1, "probs");
+//        Cashier cashier2 = new Cashier(1, "probs");
+//        Despose despose = new Despose();
+//
+//        create.setDistribution("exp");
+//        create.addNext(cashier1, 1);
+//        create.addNext(cashier2, 2);
+//
+//        cashier1.setDelayDev(0.3);
+//        cashier1.addLane(cashier2);
+//        cashier1.setMaxQueue(3);
+//        cashier1.setMaxWorkers(1);
+//        cashier1.addNext(despose, 1.0);
+//        cashier1.inAct(new Client(0.0, 1));
+//        cashier1.inAct(new Client(0.0, 1));
+//        cashier1.inAct(new Client(0.0, 1));
+//
+//        cashier2.setDelayDev(0.3);
+//        cashier2.addLane(cashier1);
+//        cashier2.setMaxQueue(3);
+//        cashier2.setMaxWorkers(1);
+//        cashier2.addNext(despose, 1.0);
+//        cashier2.inAct(new Client(0.0, 1));
+//        cashier2.inAct(new Client(0.0, 1));
+//        cashier2.inAct(new Client(0.0, 1));
+//
+//        ArrayList<Element> list = new ArrayList<>(){{add(create); add(cashier1); add(cashier2); add(despose);}};
+//        Model model = new Model(list);
+//        double time = 1000.0;
+//        model.simulate(time);
+//
+//        System.out.println("\n-------------RESULTS-------------");
+//        for (Element e : list) {
+//            e.printResult();
+//            if (e instanceof Cashier) {
+//                Cashier c = (Cashier) e;
+//                System.out.println("Cashier #" + c.getId());
+//                System.out.println("1) " + c.getStateSum() / time);
+//                System.out.println("2) " + (c.getMeanQueue() + c.getStateSum()) / time);
+//                System.out.println("3) " + time / c.getQuantity());
+//                System.out.println("4) " + (c.getMeanQueue() / time + 2) * (time - c.getWaitTime()) / c.getQuantity());
+//                System.out.println("5) " + c.getMeanQueue() / time);
+//                System.out.println("6) " + c.getFailure() / (double) (c.getFailure() + c.getQuantity()));
+//                System.out.println("7) " + c.getNumOfSwaps());
+//            } else if (e instanceof Despose) {
+//                Despose d = (Despose) e;
+//                System.out.println("4 from Despose)   " + d.getMeanTime() / d.getQuantity());
+//                System.out.println("Quantity = " + d.getQuantity());
+//            }
+//        }
+//    }
     public static void hospitalTask() {
         HashMap<Integer, Double> probs = new HashMap<Integer, Double>() {{ put(1, 0.5); put(2, 0.1); put(3, 0.4); }};
 
