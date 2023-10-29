@@ -1,7 +1,7 @@
 package Hospital.Elements;
 
 import Hospital.Other.Patient;
-import other.FunRand;
+import Hospital.Other.FunRand;
 
 public class Element {
     protected String name;

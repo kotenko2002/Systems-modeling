@@ -62,7 +62,10 @@ public class Main {
             add(walkToReception);
             add(despose);
         }});
-        int simulationTime = 100000;
+        int simulationTime = 10000;
         model.simulate(simulationTime);
+
+        System.out.println("Час, проведений хворим у системі: " + df.format(despose.getAverageTimePatientStayInBank()));
+        System.out.println("Інтервал між прибуттями хворих у лабораторію: " + df.format(simulationTime / (double)lab.getQuantity()));
     }
 }
