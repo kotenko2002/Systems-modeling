@@ -1,5 +1,6 @@
-package Hospital.Elements;
+package Hospital.Elements.Processes;
 
+import Hospital.Elements.Element;
 import Hospital.Other.Patient;
 
 import java.util.*;

@@ -1,5 +1,6 @@
-package Hospital.Elements;
+package Hospital.Elements.Processes;
 
+import Hospital.Elements.Despose;
 import Hospital.Other.Patient;
 
 public class Lab extends Process {

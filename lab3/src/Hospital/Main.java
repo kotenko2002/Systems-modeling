@@ -1,7 +1,9 @@
 package Hospital;
 
 import Hospital.Elements.*;
-import Hospital.Elements.Process;
+import Hospital.Elements.Processes.Lab;
+import Hospital.Elements.Processes.Process;
+import Hospital.Elements.Processes.Reception;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

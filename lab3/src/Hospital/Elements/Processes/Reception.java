@@ -1,4 +1,4 @@
-package Hospital.Elements;
+package Hospital.Elements.Processes;
 
 import Hospital.Other.Patient;
 
@@ -10,11 +10,15 @@ public class Reception extends Process {
         super(name, workersAmount);
     }
 
+    public void setRoom(Process room) {
+        this.room = room;
+    }
+    public void setWalkToRegistry(Process walkToRegistry) {
+        this.walkToRegistry = walkToRegistry;
+    }
+
     @Override
-    public double getDelay(Patient patient) {
-        if(patient == null) {
-            throw new RuntimeException();
-        }
+    protected double getDelay(Patient patient) {
         switch (patient.getType()) {
             case 1:
                 return 15;
@@ -26,14 +30,6 @@ public class Reception extends Process {
 
         throw new RuntimeException("Пацієнт неіснуючого типу");
     }
-
-    public void setRoom(Process room) {
-        this.room = room;
-    }
-    public void setWalkToRegistry(Process walkToRegistry) {
-        this.walkToRegistry = walkToRegistry;
-    }
-
     @Override
     protected Patient getPatientFromQueue() {
         for (Patient patient : queue) {

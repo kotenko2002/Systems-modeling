@@ -24,7 +24,7 @@ public class Element {
         nextId++;
     }
 
-    public double getDelay(Patient patient) {
+    protected double getDelay(Patient patient) {
         switch (distribution) {
             case "exp":
                 return FunRand.Exp(delayMean);
@@ -61,12 +61,6 @@ public class Element {
 
     public int getQuantity() {
         return quantity;
-    }
-    public void setDistribution(String distribution) {
-        this.distribution = distribution;
-    }
-    public void setDelayDeviation(double delayDeviation) {
-        this.delayDeviation = delayDeviation;
     }
     public void setTCurrent(double tCurrent) {
         this.tCurrent = tCurrent;
