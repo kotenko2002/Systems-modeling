@@ -8,7 +8,7 @@ public class Element {
     protected int quantity;
     protected Element nextElement;
 
-    private double delay;
+    private double delay, delayDev;
     private String distribution;
     private int workingProcessors;
 
@@ -26,7 +26,19 @@ public class Element {
     }
 
     public double getDelay() {
-        return FunRand.Exp(delay);
+        switch (distribution) {
+            case "exp":
+                delay = FunRand.Exp(delay);
+                break;
+            case "norm":
+                delay = FunRand.Norm(delay, delayDev);
+                break;
+            case "unif":
+                delay = FunRand.Unif(delay, delayDev);
+                break;
+        }
+
+        return delay;
     }
 
     public void setDistribution(String distribution) {
