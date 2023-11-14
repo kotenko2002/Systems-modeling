@@ -4,17 +4,17 @@ import Elements.Element;
 
 public class Pair {
     private Element element;
-    private double probability;
+    private double probabilityOrPriority;
 
-    public Pair(Element element, double probability) {
+    public Pair(Element element, double probabilityOrPriority) {
         this.element = element;
-        this.probability = probability;
+        this.probabilityOrPriority = probabilityOrPriority;
     }
 
     public Element getElement() {
         return element;
     }
-    public double getProbability() {
-        return probability;
+    public double getProbabilityOrPriority() {
+        return probabilityOrPriority;
     }
 }

@@ -18,7 +18,6 @@ public class Create extends Element {
         tNext = tCurrent + getDelay(null);
 
         Patient nextPatient = getNextPatient();
-        System.out.println(nextPatient.getType());
         if(nextElement != null) {
             nextElement.inAct(nextPatient);
         }

@@ -68,6 +68,10 @@ public class Main {
         model.simulate(simulationTime);
 
         System.out.println("Час, проведений хворим у системі: " + df.format(despose.getAverageTimePatientStayInBank()));
-        System.out.println("Інтервал між прибуттями хворих у лабораторію: " + df.format(simulationTime / (double)lab.getQuantity()));
+        System.out.println("\tЧас, проведений хворим першого типу системі: " + df.format(despose.getAverageTimePatientStayInBankByType(1)));
+        System.out.println("\tЧас, проведений хворим другого типу системі: " + df.format(despose.getAverageTimePatientStayInBankByType(2)));
+        System.out.println("\tЧас, проведений хворим третього типу системі: " + df.format(despose.getAverageTimePatientStayInBankByType(3)));
+
+        System.out.println("Інтервал між прибуттями хворих у лабораторію: " + df.format(simulationTime / (double)creator.getQuantity()));
     }
 }

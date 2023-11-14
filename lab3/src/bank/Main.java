@@ -36,7 +36,7 @@ public class Main {
                 "\n\tкасира №1: " + df.format(cashier1.getMeanLoad() / simulationTime) + ";" +
                 "\n\tкасира №2: " + df.format(cashier2.getMeanLoad() / simulationTime) + ";");
         System.out.println("2) Середнє число клієнтів у банку: " +
-                df.format((cashier1.getMeanLoad() + cashier1.getMeanQueue() + cashier1.getMeanLoad() + cashier1.getMeanQueue()) / simulationTime));
+                df.format((cashier1.getMeanLoad() + cashier1.getMeanQueue() + cashier2.getMeanLoad() + cashier2.getMeanQueue()) / simulationTime));
         System.out.println("3) Середній інтервал часу між від'їздами клієнтів від вікон: " + df.format(simulationTime / (double)creator.getQuantity()));
         System.out.println("4) Середній час перебування клієнта в банку: " + df.format(despose.getAverageTimeClientStayInBank()) + "мс;");
         System.out.println("5) Cереднє число клієнтів у" +

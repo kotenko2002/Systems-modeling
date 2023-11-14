@@ -33,4 +33,22 @@ public class Despose extends Element {
 
         return avgTime / patients.size();
     }
+
+    public double getAverageTimePatientStayInBankByType(int type) {
+        if(type < 1 || type > 3) {
+            throw new RuntimeException();
+        }
+
+        double avgTime = 0;
+        int amount = 0;
+
+        for (Patient patient : patients) {
+            if(patient.getType() == type) {
+                avgTime += patient.getTimeSpentInSystem();
+                amount++;
+            }
+        }
+
+        return avgTime / amount;
+    }
 }

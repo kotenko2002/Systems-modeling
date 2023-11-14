@@ -1,6 +1,7 @@
 package Elements;
 
 import Other.Pair;
+import Other.TransitionType;
 
 import java.util.*;
 
@@ -10,6 +11,7 @@ public class Process extends Element {
     private double meanLoad;
     private ArrayList<Pair> nextElements;
     private boolean isAvailable;
+    private TransitionType type;
 
     public Process(String name, double delay) {
         super(name, delay);
@@ -18,6 +20,12 @@ public class Process extends Element {
         meanLoad = 0.0;
         nextElements = new ArrayList<>();
         isAvailable = true;
+
+        type = TransitionType.Probability;
+    }
+    public Process(String name, double delay, TransitionType type) {
+        this(name, delay);
+        this.type = type;
     }
 
     @Override
@@ -74,10 +82,21 @@ public class Process extends Element {
             return null;
         }
 
+        switch (type){
+            case Probability:
+                return getNextElementByProbability();
+            case Priority:
+                return getNextElementByPriority();
+        }
+
+        throw new RuntimeException();
+    }
+
+    private Element getNextElementByProbability() {
         double totalProbability = 0;
 
         for (Pair pair : nextElements) {
-            totalProbability += pair.getProbability();
+            totalProbability += pair.getProbabilityOrPriority();
         }
 
         double randomValue = new Random().nextDouble() * totalProbability;
@@ -85,12 +104,19 @@ public class Process extends Element {
         double cumulativeProbability = 0;
 
         for (Pair pair : nextElements) {
-            cumulativeProbability += pair.getProbability();
+            cumulativeProbability += pair.getProbabilityOrPriority();
             if (randomValue <= cumulativeProbability) {
                 return pair.getElement();
             }
         }
 
         throw new RuntimeException();
+    }
+
+    private Element getNextElementByPriority() {
+        Collections.sort(nextElements, Comparator.comparingDouble(Pair::getProbabilityOrPriority));
+
+        int indexOfLastElement = nextElements.size() - 1;
+        return nextElements.remove(indexOfLastElement).getElement();
     }
 }
